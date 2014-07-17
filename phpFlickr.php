@@ -222,9 +222,11 @@ if ( !class_exists('phpFlickr') ) {
 			if ( function_exists('curl_init') ) {
 				// Has curl. Use it!
 				$curl = curl_init($this->rest_endpoint);
-				curl_setopt($curl, CURLOPT_POST, true);
-				curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				//curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+				curl_setopt($curl, CURLOPT_POST, 1);
+				curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 				$response = curl_exec($curl);
 				curl_close($curl);
 			} else {
@@ -434,10 +436,10 @@ if ( !class_exists('phpFlickr') ) {
 				curl_setopt($curl, CURLOPT_POST, true);
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $args);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 				$response = curl_exec($curl);
 				$this->response = $response;
 				curl_close($curl);
-
 				$rsp = explode("\n", $response);
 				foreach ($rsp as $line) {
 					if (preg_match('|<err code="([0-9]+)" msg="(.*)"|', $line, $match)) {
@@ -496,6 +498,7 @@ if ( !class_exists('phpFlickr') ) {
 				curl_setopt($curl, CURLOPT_POST, true);
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $args);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 				$response = curl_exec($curl);
 				$this->response = $response;
 				curl_close($curl);
@@ -557,6 +560,7 @@ if ( !class_exists('phpFlickr') ) {
 				curl_setopt($curl, CURLOPT_POST, true);
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $args);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 				$response = curl_exec($curl);
 				$this->response = $response;
 				curl_close($curl);
